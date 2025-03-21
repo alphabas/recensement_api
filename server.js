@@ -11,6 +11,13 @@ const RESPONSE_CODES = require("./constants/RESPONSE_CODES");
 const RESPONSE_STATUS = require("./constants/RESPONSE_STATUS");
 const app = express();
 const bindUser = require("./middleware/bindUser");
+const bodyParser = require('body-parser');
+
+
+app.use(bodyParser.json()); // Vérifiez que cela est bien configuré
+
+
+
 dotenv.config({ path: path.join(__dirname, "./.env") });
 
 const { Server } = require("socket.io");

@@ -1,0 +1,31 @@
+
+I have constituted a function ` getCurrentDataCountry` which is a function asynchronous processing a HTTP request to retrieve And return data geographical based on pagination and filtering criteria . Here a detailed explanation of how it works :
+
+1. ** Retrieving query parameters * * :
+- The parameters are Excerpts from ` req.query` , including `rows` ( number of rows to return ), `first` ( starting index for pagination), ` sortField` and ` sortOrder` ( unused ) in the function ), `search` (not used ), `latitude` and `longitude` (for filtering ).
+
+2. ** Error handling * *:
+- The function East encapsulated in a `try-catch` block to catch and handle possible errors execution .
+
+Parameter conversion ** :
+- ` rowsPerPage ` and ` startIndex ` are converted to integers from query input .
+
+4. **Reading the data geographical * * :
+- The data are read from a file shapefile (`tl_2021_us_county.shp`) using the ` readShpFile` function .
+
+5. **Pagination* *:
+- The data are paginated using `slice`, keeping only that the records between ` startIndex` and ` startIndex + rowsPerPage` .
+
+6. ** Elimination of duplicates * *:
+- The `reduce` function is used to create a ` currentElement` array that stores objects containing unique latitude/ longitude coordinates . This East made by checking if an object with the same contact details already exists in the accumulator ` acc` .
+
+7. ** Filtering results * *:
+- The elements are filtered based on the provided latitude and longitude conditions in the query . If `latitude` or `longitude` is specified , only the elements correspondents are included . If none of these criteria is not specified , all elements of ` currentElement` are retained .
+
+8. **Construction of the response * *:
+- If elements filtered exist, they are returned in the response , otherwise ` currentElement` is used . The JSON response contains a status code , a message and the data returned , thus than the total number of elements correspondents .
+
+9. ** Error handling * *:
+- In case error , the function returns a status code 500 with the error message .
+
+In summary, ` getCurrentDataCountry` allows you to retrieve , paginate And filter data geographic locations while eliminating duplicates , and returning the results in JSON format to the client. And then I attach it to a specific route

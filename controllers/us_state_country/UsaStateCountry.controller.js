@@ -27,7 +27,7 @@ const readShpFile = async (fileName) => {
 
 const getCurrentDataCountry = async (req, res) => {
     const { rows, first, sortField, sortOrder, search, latitude, longitude } = req.query;
-    console.log("__+++<>",req.query)
+    
 
     try {
         const rowsPerPage = parseInt(rows);

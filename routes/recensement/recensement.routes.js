@@ -1,5 +1,5 @@
 const express = require("express");
-const Recensement_controller = require("../../controllers/recensement/Recensement.controller");
+const Recensement_controller = require("../../controllers/recensement/recensement.controller");
 const recensement_routes = express.Router();
 
 

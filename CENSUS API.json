@@ -1,0 +1,26 @@
+CENSUS API
+===========
+
+-> URI WITH FILTERS [latitude, longitude, rows]
+
+    latitude: Specifies the latitude of the location. (optional)
+    longitude: Specifies the longitude of the location. (optional)
+    rows: Indicates the number of rows to display. (optional)
+    first: Indicates the page number. (required)
+
+Example URI:
+         http://localhost:4001/recensement_state/all?rows=40&first=1&latitude=55.225&longitude=56.77
+
+->URI WITH SEARCH [search]
+
+    search: Allows searching within the census data array. (optional)
+ 
+ Example URI:
+         http://localhost:4001/recensement_state/all?first=1&search="56"
+
+
+
+         MY API WITH THE LOCAL DATA
+         ==========================
+
+http://localhost:4001/recensement_cityzen/all?rows=50&first=0&search="ltd"&latitude=55.225&longitude=56.77
