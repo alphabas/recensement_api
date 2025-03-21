@@ -16,6 +16,7 @@ dotenv.config({ path: path.join(__dirname, "./.env") });
 const { Server } = require("socket.io");
 
 const recensement_router = require("./routes/recensement/Recensement_provider");
+const usa_state_country_router = require("./routes/usa_state_country/Usa_stateCountry_provider");
 
 app.use(cors());
 app.set("view engine", "ejs");
@@ -27,6 +28,8 @@ app.use(fileUpload());
 app.all("*", bindUser);
 
 app.use("/recensement_cityzen",recensement_router);
+app.use("/recensement_state",usa_state_country_router);
+
 
 app.all("*", (req, res) => {
   res.status(RESPONSE_CODES.NOT_FOUND).json({

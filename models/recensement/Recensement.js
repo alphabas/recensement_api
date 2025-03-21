@@ -45,10 +45,6 @@ const Recensement = sequelize.define('recensement_cityzen', {
         type: DataTypes.STRING(200),
         allowNull: false
     },
-    country:{
-        type: DataTypes.STRING(70),
-        allowNull: false
-    },
     latitude:{
         type: DataTypes.DECIMAL,
         allowNull: false
