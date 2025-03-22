@@ -79,10 +79,9 @@ const getZoomLevel = (density) => {
   }
 
 
-
   const runingIsBusinessArea = (block) => {
     const businessLandUses = ["Commercial", "Mixed-use", "Industrial"];
-    const businessIndicators = block.dens > 60 ;
+    const businessIndicators = block.density > 60 ;
   
     return businessLandUses.includes(block.landUse) || businessIndicators;
   };
@@ -106,10 +105,11 @@ const getCurrentDataCountry = async (req, res) => {
         const currentElement = paginatedData.reduce((acc, feature) => {
             const coords = feature.geometry.coordinates;
             const areaData = 9.8e6;
+            const densElement = 120;
             coords.forEach(polygon => {
                 polygon.forEach(async coord => {
-                    const densElement = await getDensity(coord[0], coord[1],areaData); 
-                    const latLong = { lat: coord[0], long: coord[1], dens : densElement };
+                    // const densElement = await getDensity(coord[0], coord[1],areaData); 
+                    const latLong = { lat: coord[0], long: coord[1], dens : 120 };
                     // VER DOUBLON
                     const exists = acc.some(item => item.lat === latLong.lat && item.long === latLong.long);
                     if (!exists) {
@@ -122,6 +122,8 @@ const getCurrentDataCountry = async (req, res) => {
 
         // Filter who the population density and ajust zoom level > 100
         const arr = []  
+        
+        
         const filteredData = currentElement.forEach(item => {
             if(item.dens > 50){
                 const zoom = getZoomLevel(item.dens);
@@ -130,19 +132,20 @@ const getCurrentDataCountry = async (req, res) => {
                     long : item.long,
                     density: item.dens,
                     zoom : zoom,
+                    // landUse : "Commercial"
                     landUse : item?.landUse 
                 })
                 
             }
-            
+        //   return arr  
           });
         
+        //   console.log("++++++++",arr
+          // Filter the census blocks Remove Census Blocks that are unlikely to contain businesses and Prioritize urban and commercial areas.
+          const filteredBlocks = arr?.filter(block => runingIsBusinessArea(block));
+            console.log("+ARR+",filteredBlocks)
 
-
-        // Filter the census blocks Remove Census Blocks that are unlikely to contain businesses and Prioritize urban and commercial areas.
-        const filteredBlocks = filteredData.filter(block => runingIsBusinessArea(block));
-
-        // Filter 
+        // Fityilter 
         const filteredElements = filteredBlocks.filter(item => {
             const latCondition = latitude 
               ? String(item.lat).includes(latitude) 
