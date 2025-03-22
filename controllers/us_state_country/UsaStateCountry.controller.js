@@ -162,10 +162,13 @@ const getCurrentDataCountry = async (req, res) => {
 
         //   const filteredZoomData = resultElements.filter(el => el.zoom === zoom);
 
-          const filteredZoomData = zoom !== "" && resultElements.some(el => el.zoom === zoom)
-          ? resultElements.filter(el => el.zoom === zoom)
-          : resultElements;
-
+          var filteredZoomData = []
+          if(zoom){
+            filteredZoomData = resultElements.filter(el => JSON.parse(el.zoom) === JSON.parse(zoom))
+          }else{
+            filteredZoomData = resultElements
+          }
+          
           console.log("++++++++++++=",resultElements)
         res.status(RESPONSE_CODES.OK).json({
             statusCode: RESPONSE_CODES.OK,
