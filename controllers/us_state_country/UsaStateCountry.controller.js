@@ -158,13 +158,22 @@ const getCurrentDataCountry = async (req, res) => {
 
           const resultElements = (filteredElements.length > 0 || latitude || longitude) ? filteredElements : currentElement;
 
+          // filter by zom value
+
+        //   const filteredZoomData = resultElements.filter(el => el.zoom === zoom);
+
+          const filteredZoomData = zoom !== "" && resultElements.some(el => el.zoom === zoom)
+          ? resultElements.filter(el => el.zoom === zoom)
+          : resultElements;
+
+          console.log("++++++++++++=",resultElements)
         res.status(RESPONSE_CODES.OK).json({
             statusCode: RESPONSE_CODES.OK,
             httpStatus: RESPONSE_STATUS.OK,
             message: "List census DATA...!",
             result: {
-                data: resultElements,
-                counter: resultElements.length,
+                data: filteredZoomData,
+                counter: filteredZoomData.length,
                 totoals: currentElement.length
             },
         });
