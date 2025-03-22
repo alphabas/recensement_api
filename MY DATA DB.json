@@ -1,0 +1,65 @@
+MY DATA DB
+===========
+
+
+{
+  "statusCode": 200,
+  "httpStatus": "OK",
+  "message": "List request",
+  "result": {
+    "data": [
+      {
+        "id": 1,
+        "name": "Ambassy ltd",
+        "indistry_category_id": 1,
+        "census_block_id": 3,
+        "adress": "Bujumbura , kibenga",
+        "city": "Bujumbura",
+        "code_postal": "234",
+        "latitude": "3.342321",
+        "longitude": "34.459200",
+        "date_created": "2025-03-19T14:27:28.000Z",
+        "census_block": {
+          "id_census": 3,
+          "name_census": "Ichoi",
+          "population_density": 89
+        },
+        "indistry_category": {
+          "id_indistry_category": 1,
+          "name_indistry_category": "Numeric"
+        }
+      },
+      {
+        "id": 2,
+        "name": "Common society",
+        "indistry_category_id": 2,
+        "census_block_id": 2,
+        "adress": "Bujumbura , kibenga",
+        "city": "Gitega",
+        "code_postal": "234",
+        "latitude": "4.35543",
+        "longitude": "25.434343453",
+        "date_created": "2025-03-19T14:28:20.000Z",
+        "census_block": {
+          "id_census": 2,
+          "name_census": "River",
+          "population_density": 70
+        },
+        "indistry_category": {
+          "id_indistry_category": 2,
+          "name_indistry_category": "Digitalisation"
+        }
+      }
+    ],
+    "totalRecords": [
+      {
+        "name": "Ambassy ltd",
+        "count": 2
+      },
+      {
+        "name": "Common society",
+        "count": 1
+      }
+    ]
+  }
+}
